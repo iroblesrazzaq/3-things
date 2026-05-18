@@ -63,7 +63,7 @@ enum VoiceExtractionEvalRunner {
     static func run(
         cases: [VoiceExtractionEvalCase],
         runsPerTranscript: Int = 5,
-        extractor: FoundationModelsVoiceDraftExtractor = FoundationModelsVoiceDraftExtractor(),
+        extractor: ToolVoiceDraftExtractor = ToolVoiceDraftExtractor(),
         progress: (@MainActor (String) -> Void)? = nil
     ) async -> VoiceExtractionEvalReport {
         let n = max(1, runsPerTranscript)
@@ -132,7 +132,7 @@ enum VoiceExtractionEvalRunner {
     private static func singleRun(
         evalCase: VoiceExtractionEvalCase,
         transcript: String,
-        extractor: FoundationModelsVoiceDraftExtractor
+        extractor: ToolVoiceDraftExtractor
     ) async -> VoiceExtractionEvalRunOutcome {
         var draft: VoiceExtractionDraft?
         var err: Error?

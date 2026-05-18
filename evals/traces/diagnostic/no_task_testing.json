@@ -1,0 +1,7 @@
+{
+  "case_id": "no_task_testing",
+  "transcript": "Hello? Testing, testing.",
+  "calls": [
+    {"tool": "no_action", "reason": "no_actionable"}
+  ]
+}

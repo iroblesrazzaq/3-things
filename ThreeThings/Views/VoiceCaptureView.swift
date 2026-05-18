@@ -32,6 +32,19 @@ struct VoiceCaptureView: View {
                     .themeCard(cornerRadius: 12, padding: 10)
             }
 
+            if viewModel.isExtracting,
+               !speechManager.latestTranscript.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                HStack(alignment: .center, spacing: 10) {
+                    ProgressView()
+                        .controlSize(.small)
+                    Text("Turning speech into your 1–3 things…")
+                        .font(.footnote)
+                        .foregroundStyle(ThemePalette.muted)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Extracting tasks from transcript")
+            }
+
             if !compact {
                 Button("Type instead") {
                     speechManager.cancelRecording()
@@ -82,21 +95,19 @@ struct VoiceCaptureView: View {
         .onChange(of: speechManager.latestTranscript) { _, newValue in
             viewModel.updateVoiceTranscriptSnapshot(newValue)
         }
-        .onChange(of: speechManager.phase) { oldPhase, newPhase in
+        .onChange(of: speechManager.phase) { _, newPhase in
             viewModel.setVoiceRecordingActive(newPhase == .recording)
-            if case .transcribing = oldPhase, case .idle = newPhase {
-                Task {
-                    await viewModel.flushLiveExtractionNow(transcript: speechManager.latestTranscript)
-                }
-            }
-            if case .failed = newPhase {
-                Task {
-                    await viewModel.flushLiveExtractionNow(transcript: speechManager.latestTranscript)
-                }
-            }
         }
         .onAppear {
             viewModel.setVoiceRecordingActive(speechManager.isRecording)
+            speechManager.onFinalTranscript = { [viewModel] transcript in
+                Task {
+                    await viewModel.ingestFinalTranscript(transcript)
+                }
+            }
+        }
+        .onDisappear {
+            speechManager.onFinalTranscript = nil
         }
     }
 
@@ -184,19 +195,38 @@ struct VoiceCaptureView: View {
                 .font(.footnote)
                 .foregroundStyle(ThemePalette.muted)
         case .recording:
-            HStack(spacing: 8) {
-                Image(systemName: "waveform.circle.fill")
-                Text("Listening… transcript updates live.")
-                    .font(.footnote.weight(.semibold))
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 8) {
+                    Image(systemName: "waveform.circle.fill")
+                    Text("Listening… transcript updates live.")
+                        .font(.footnote.weight(.semibold))
+                }
+                .foregroundStyle(ThemePalette.primary)
+                if viewModel.isExtracting {
+                    HStack(spacing: 6) {
+                        ProgressView()
+                            .controlSize(.mini)
+                            .tint(ThemePalette.primary)
+                        Text("Drafting tasks from what you've said so far…")
+                            .font(.caption2)
+                            .foregroundStyle(ThemePalette.muted)
+                    }
+                }
             }
-            .foregroundStyle(ThemePalette.primary)
         case .transcribing:
-            HStack(spacing: 8) {
+            HStack(alignment: .top, spacing: 8) {
                 ProgressView()
                     .tint(ThemePalette.primary)
-                Text("Finishing transcript…")
-                    .font(.footnote)
-                    .foregroundStyle(ThemePalette.muted)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Finishing transcript…")
+                        .font(.footnote)
+                        .foregroundStyle(ThemePalette.muted)
+                    if viewModel.isExtracting {
+                        Text("Still updating your draft from the last transcript.")
+                            .font(.caption2)
+                            .foregroundStyle(ThemePalette.muted)
+                    }
+                }
             }
         case .failed(let message):
             Text(message)

@@ -1,0 +1,14 @@
+{
+  "description": "Overnight autoresearch default — 8 representative cases, variant 0, avg@2",
+  "subset": "autoresearch",
+  "cases": null,
+  "variants": 1,
+  "runs": 2,
+  "model": "llama-3.1-8b-instant",
+  "temperature": 0.7,
+  "tool_contract": "set_state",
+  "prompt_mode": "full_and_fragment",
+  "score_steps": true,
+  "strict_tools": false,
+  "gate_min_mean_at_2_delta": 0.05
+}

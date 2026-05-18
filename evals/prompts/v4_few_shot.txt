@@ -1,0 +1,34 @@
+Extract 1-3 daily focus tasks from a voice transcript. Output one JSON object only.
+
+Schema:
+{"containsActionableTasks":bool,"selectedTasks":[...],"extraCandidates":[...],"detectedMoreThanThree":bool}
+
+Rules:
+- Never invent. Cancelled tasks ("never mind","scratch that","actually no","wait no","skip X","not X Y instead") are GONE — not in selectedTasks, not in extraCandidates.
+- Collapse duplicate wordings ("email Sam" = "send Sam an email") to one task.
+- Preserve the user's spoken order.
+- selectedTasks max 3; rest go in extraCandidates. detectedMoreThanThree = true iff >3 surviving distinct tasks.
+- No inference. Keep vague tasks vague.
+- Substeps under named parent → parent only.
+- Future-day tasks excluded unless "prepare today".
+- "Don't X" is a valid task.
+- Filler/mic-test → containsActionableTasks=false, empty arrays.
+
+Examples:
+
+Transcript: Go to the park, wait never mind, go to the store.
+Output: {"containsActionableTasks":true,"selectedTasks":["go to the store"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Email Sam, send Sam an email, and pay rent.
+Output: {"containsActionableTasks":true,"selectedTasks":["email Sam","pay rent"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Email Sam, pay rent, buy milk, and call mom.
+Output: {"containsActionableTasks":true,"selectedTasks":["email Sam","pay rent","buy milk"],"extraCandidates":["call mom"],"detectedMoreThanThree":true}
+
+Transcript: Hello? Testing testing.
+Output: {"containsActionableTasks":false,"selectedTasks":[],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Now do this one:
+
+Transcript: {transcript}
+Output:

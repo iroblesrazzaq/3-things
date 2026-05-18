@@ -24,7 +24,7 @@ This project targets **iOS 26+** so it can use:
 2. Open voice capture, tap **Start speaking**; say a short three-task phrase (e.g. “Tomorrow buy milk, call mom, and book a haircut”).
 3. Confirm **partial text updates** while still recording.
 4. Tap **Stop**; confirm the **final transcript** remains (not blank) and matches what you said closely enough to proceed.
-5. Confirm the app moves into **live extraction / review** (debounced path from `AppViewModel.updateVoiceTranscriptSnapshot`) without needing **Type instead** unless the model is unavailable for your locale.
+5. Confirm the app moves into **live extraction / review** (`LiveExtractionScheduler`: debounced partials via `updateVoiceTranscriptSnapshot`, final flush via `ingestFinalTranscript` on stop) without needing **Type instead** unless the model is unavailable for your locale.
 6. **Level meter**: while recording, the fixed bar meter should stay **mostly flat in silence** and **pulse up when you speak** (bars do not scroll sideways—only height reflects level); after **Stop** or **Cancel**, it should **reset** (no stale high bars during “Finishing transcript…”).
 
 ## Tests

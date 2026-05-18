@@ -1,0 +1,9 @@
+{
+  "case_id": "literal_three_store_park_food",
+  "transcript": "Go to a store, go to the park, and eat food.",
+  "calls": [
+    {"tool": "add_task", "text": "go to a store"},
+    {"tool": "add_task", "text": "go to the park"},
+    {"tool": "add_task", "text": "eat food"}
+  ]
+}

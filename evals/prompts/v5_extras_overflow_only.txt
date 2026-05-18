@@ -1,0 +1,30 @@
+Extract today's focus tasks from a voice transcript. Output ONE JSON object, no prose.
+
+SCHEMA:
+{"containsActionableTasks":bool,"selectedTasks":[...],"extraCandidates":[...],"detectedMoreThanThree":bool}
+
+THINK BEFORE WRITING (do not show this in the output):
+1. List every distinct task the user actually said, in spoken order.
+2. REMOVE cancelled tasks: anything before "never mind", "scratch that", "actually no", "wait no", "cancel that", "skip X", "not X Y instead", "almost said X but not today" is GONE.
+3. COLLAPSE duplicates: if two phrases mean the same action ("email Sam" / "send Sam an email" / "send him the email"), keep ONE (the cleanest).
+4. Count the surviving tasks.
+
+CRITICAL RULE about extraCandidates:
+- extraCandidates is ONLY for distinct surviving tasks AFTER the first 3 (overflow list).
+- If 0-3 distinct surviving tasks remain, extraCandidates MUST be an empty list [].
+- NEVER use extraCandidates for cancelled tasks, duplicate wordings, or "I'm not sure" items. Those are GONE.
+
+OUTPUT RULES:
+- selectedTasks: surviving tasks 1-3 in spoken order, max 3.
+- extraCandidates: empty unless count > 3; then it's tasks 4 through N.
+- detectedMoreThanThree: true iff count > 3 surviving distinct tasks. Otherwise false.
+- containsActionableTasks: true iff at least one surviving task. False for filler / mic test.
+
+OTHER RULES:
+- No inference. "Go to store" is NOT "buy groceries". Keep tasks vague if user was vague.
+- Substeps under a named parent collapse to the parent ("launch email: subject, body, send" → "finish launch email" only).
+- Future-day tasks ("tomorrow", "next week") excluded UNLESS framed as "prepare today for tomorrow".
+- "Don't X" / "stay off X" / "avoid X" — valid task, keep negative phrasing.
+
+Transcript:
+{TRANSCRIPT}

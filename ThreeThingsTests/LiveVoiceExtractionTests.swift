@@ -121,7 +121,7 @@ final class LiveVoiceExtractionTests: XCTestCase {
     func testOverflowFromLiveHeuristicExtraction() async throws {
         let viewModel = AppViewModel(
             defaults: defaults,
-            voiceDraftExtractor: HeuristicVoiceDraftExtractor(),
+            voiceDraftExtractor: HeuristicToolVoiceDraftExtractor(),
             liveExtractionDebounceNanoseconds: 60_000_000
         )
         viewModel.selectedInputMode = .voice
@@ -131,6 +131,45 @@ final class LiveVoiceExtractionTests: XCTestCase {
 
         XCTAssertTrue(viewModel.plan.detectedMoreThanThree)
         XCTAssertFalse(viewModel.plan.extras.isEmpty)
+    }
+
+    func testNoActionablePreservesExistingDraft() async throws {
+        let extractor = NoActionAfterDraftExtractor()
+        let viewModel = AppViewModel(
+            defaults: defaults,
+            voiceDraftExtractor: extractor,
+            liveExtractionDebounceNanoseconds: 60_000_000
+        )
+        viewModel.selectedInputMode = .voice
+
+        await viewModel.flushLiveExtractionNow(
+            transcript: "call mom today please thanks extra"
+        )
+        XCTAssertEqual(viewModel.plan.tasks[0].text, "call mom")
+        XCTAssertNotNil(viewModel.voiceDraft)
+
+        await viewModel.flushLiveExtractionNow(
+            transcript: "testing one two three four five six seven eight"
+        )
+        XCTAssertEqual(viewModel.plan.tasks[0].text, "call mom")
+        XCTAssertNotNil(viewModel.voiceDraft)
+        XCTAssertEqual(extractor.callCount, 2)
+    }
+
+    func testNoActionableClearsWhenNoPriorDraft() async throws {
+        let viewModel = AppViewModel(
+            defaults: defaults,
+            voiceDraftExtractor: AlwaysNoActionableExtractor(),
+            liveExtractionDebounceNanoseconds: 60_000_000
+        )
+        viewModel.selectedInputMode = .voice
+
+        await viewModel.flushLiveExtractionNow(
+            transcript: "testing one two three four five six seven eight"
+        )
+
+        XCTAssertNil(viewModel.voiceDraft)
+        XCTAssertTrue(viewModel.extractionStatus.contains("No tasks extracted"))
     }
 
     func testCorrectionReplacesDraftFromLatestTranscript() async throws {
@@ -161,23 +200,23 @@ final class LiveVoiceExtractionTests: XCTestCase {
 private final class SlowHeuristicExtractor: VoiceDraftExtracting, @unchecked Sendable {
     let providerName = "SlowHeuristic"
     private let delayNanoseconds: UInt64
-    private let inner = HeuristicVoiceDraftExtractor()
+    private let inner = HeuristicToolVoiceDraftExtractor()
 
     init(delayNanoseconds: UInt64) {
         self.delayNanoseconds = delayNanoseconds
     }
 
-    func extractDraft(from transcript: String) async throws -> VoiceExtractionDraft {
+    func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
         try await Task.sleep(nanoseconds: delayNanoseconds)
-        return try await inner.extractDraft(from: transcript)
+        return try await inner.applyTranscript(context)
     }
 }
 
 private final class ThrowingEmptyModelExtractor: VoiceDraftExtracting, @unchecked Sendable {
     let providerName = "ThrowingEmpty"
 
-    func extractDraft(from transcript: String) async throws -> VoiceExtractionDraft {
-        _ = transcript
+    func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
+        _ = context
         throw VoiceDraftExtractionError.emptyModelOutput
     }
 }
@@ -185,24 +224,84 @@ private final class ThrowingEmptyModelExtractor: VoiceDraftExtracting, @unchecke
 private final class ScriptedVoiceExtractor: VoiceDraftExtracting, @unchecked Sendable {
     let providerName = "Scripted"
 
-    func extractDraft(from transcript: String) async throws -> VoiceExtractionDraft {
+    func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
+        let transcript = context.fullTranscript
         if transcript.contains("PHASE1") {
-            return try VoiceDraftPostProcessor.buildDraft(
+            let draft = try VoiceDraftPostProcessor.buildDraft(
                 selectedTasks: ["A", "B", "C"],
                 extraCandidates: [],
                 detectedMoreThanThree: false,
                 cleanedTranscript: transcript
             )
+            let state = VoiceDraftSessionState(
+                selectedTasks: draft.selectedTasks,
+                extraCandidates: draft.extraCandidates,
+                processedTranscriptCharacterCount: transcript.count,
+                lastFullTranscript: transcript
+            )
+            return (.draft(draft), state)
         }
         if transcript.contains("PHASE2") {
-            return try VoiceDraftPostProcessor.buildDraft(
+            let draft = try VoiceDraftPostProcessor.buildDraft(
                 selectedTasks: ["OnlyNew"],
                 extraCandidates: [],
                 detectedMoreThanThree: false,
                 cleanedTranscript: transcript
             )
+            let state = VoiceDraftSessionState(
+                selectedTasks: draft.selectedTasks,
+                extraCandidates: draft.extraCandidates,
+                processedTranscriptCharacterCount: transcript.count,
+                lastFullTranscript: transcript
+            )
+            return (.draft(draft), state)
         }
         throw VoiceDraftExtractionError.emptyModelOutput
+    }
+}
+
+private final class NoActionAfterDraftExtractor: VoiceDraftExtracting, @unchecked Sendable {
+    let providerName = "NoActionAfterDraft"
+    private(set) var callCount = 0
+
+    func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
+        callCount += 1
+        let transcript = context.fullTranscript
+        if callCount == 1 {
+            let draft = try VoiceDraftPostProcessor.buildDraft(
+                selectedTasks: ["call mom"],
+                extraCandidates: [],
+                detectedMoreThanThree: false,
+                cleanedTranscript: transcript
+            )
+            let state = VoiceDraftSessionState(
+                selectedTasks: draft.selectedTasks,
+                extraCandidates: draft.extraCandidates,
+                processedTranscriptCharacterCount: transcript.count,
+                lastFullTranscript: transcript
+            )
+            return (.draft(draft), state)
+        }
+        let state = VoiceDraftSessionState(
+            selectedTasks: ["call mom"],
+            extraCandidates: [],
+            processedTranscriptCharacterCount: transcript.count,
+            lastFullTranscript: transcript
+        )
+        return (.noDraft(reason: .noActionable), state)
+    }
+}
+
+private final class AlwaysNoActionableExtractor: VoiceDraftExtracting, @unchecked Sendable {
+    let providerName = "AlwaysNoActionable"
+
+    func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
+        let transcript = context.fullTranscript
+        let state = VoiceDraftSessionState(
+            processedTranscriptCharacterCount: transcript.count,
+            lastFullTranscript: transcript
+        )
+        return (.noDraft(reason: .noActionable), state)
     }
 }
 
@@ -210,11 +309,11 @@ private final class CountingHeuristicExtractor: VoiceDraftExtracting, @unchecked
     let providerName = "CountingHeuristic"
     var callCount = 0
     private(set) var lastTranscript: String?
-    private let inner = HeuristicVoiceDraftExtractor()
+    private let inner = HeuristicToolVoiceDraftExtractor()
 
-    func extractDraft(from transcript: String) async throws -> VoiceExtractionDraft {
+    func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
         callCount += 1
-        lastTranscript = transcript
-        return try await inner.extractDraft(from: transcript)
+        lastTranscript = context.fullTranscript
+        return try await inner.applyTranscript(context)
     }
 }

@@ -20,6 +20,9 @@ final class SpeechCaptureManager: ObservableObject {
     @Published private(set) var latestTranscript: String = ""
     @Published private(set) var errorMessage: String?
 
+    /// Called once when recording stops with the finalized transcript (before phase becomes idle).
+    var onFinalTranscript: ((String) -> Void)?
+
     #if DEBUG
     /// Latest line from the live speech pipeline (device `SFSpeechLiveCapture` only). Shown in DEBUG UI.
     @Published private(set) var speechDiagnosticLine: String = ""
@@ -158,6 +161,7 @@ final class SpeechCaptureManager: ObservableObject {
 
             latestTranscript = trimmed
             errorMessage = nil
+            onFinalTranscript?(trimmed)
             phase = .idle
             clearAudioLevels()
         } catch {

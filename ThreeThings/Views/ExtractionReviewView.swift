@@ -15,6 +15,20 @@ struct ExtractionReviewView: View {
                 actions
             }
 
+            if viewModel.isExtracting {
+                ZStack {
+                    Color.primary.opacity(0.04)
+                    VStack(spacing: 10) {
+                        ProgressView()
+                        Text("Updating draft…")
+                            .font(.caption.weight(.medium))
+                            .foregroundStyle(ThemePalette.muted)
+                    }
+                }
+                .allowsHitTesting(false)
+                .transition(.opacity)
+            }
+
             if let extraIdx = pendingReplaceExtraIndex,
                viewModel.plan.extras.indices.contains(extraIdx) {
                 ReplaceThingPickerOverlay(
@@ -37,6 +51,7 @@ struct ExtractionReviewView: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: pendingReplaceExtraIndex)
+        .animation(.easeInOut(duration: 0.22), value: viewModel.isExtracting)
         .onChange(of: viewModel.plan.extras) { _, extras in
             if let p = pendingReplaceExtraIndex, !extras.indices.contains(p) {
                 pendingReplaceExtraIndex = nil

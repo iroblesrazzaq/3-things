@@ -1,0 +1,10 @@
+{
+  "case_id": "overflow_four_clean",
+  "transcript": "Email Sam, pay rent, buy milk, and call mom.",
+  "calls": [
+    {"tool": "add_task", "text": "email Sam"},
+    {"tool": "add_task", "text": "pay rent"},
+    {"tool": "add_task", "text": "buy milk"},
+    {"tool": "add_task", "text": "call mom"}
+  ]
+}

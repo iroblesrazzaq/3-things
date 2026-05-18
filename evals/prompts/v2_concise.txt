@@ -1,0 +1,18 @@
+Extract today's tasks from this transcript. Return one JSON object, no prose.
+
+Rules:
+- "never mind", "scratch that", "actually no", "wait no", "cancel that", "not X, Y instead", "skip X" -> the cancelled task IS GONE. Not in selected. Not in extras.
+- Two phrases meaning the same action ("email Sam" / "send Sam an email", "buy milk" / "get milk") -> ONE task, cleanest wording.
+- selectedTasks must be in the order the user said them, max 3.
+- Tasks 4+ go in extraCandidates. detectedMoreThanThree=true iff >3 distinct surviving tasks.
+- No inference. "Go to store" is NOT "buy groceries". Keep vague tasks vague.
+- Substeps under a named parent -> output parent only.
+- Future-day tasks excluded unless user says "prepare today for tomorrow".
+- "Don't X" is a valid task; keep negative phrasing.
+- Filler/mic-test/no-task -> containsActionableTasks=false, both arrays empty.
+
+JSON shape:
+{"containsActionableTasks":bool,"selectedTasks":[...],"extraCandidates":[...],"detectedMoreThanThree":bool}
+
+Transcript:
+{transcript}

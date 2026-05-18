@@ -1,0 +1,55 @@
+Extract today's focus tasks from a voice transcript. Output ONE JSON object only.
+
+Schema:
+{"containsActionableTasks":bool,"selectedTasks":[...],"extraCandidates":[...],"detectedMoreThanThree":bool}
+
+WHAT GOES IN EACH FIELD:
+- selectedTasks: tasks 1, 2, 3 (in spoken order). Max 3.
+- extraCandidates: tasks 4, 5, ... ONLY if more than 3 distinct surviving tasks. Otherwise [].
+- detectedMoreThanThree: true iff >3 surviving distinct tasks.
+- containsActionableTasks: false iff transcript is filler/mic-test/no-task.
+
+CRITICAL: extraCandidates is NEVER for cancelled tasks, duplicate wordings, or things you are unsure about. Those simply DO NOT appear anywhere in the output.
+
+PROCESS (do not show your work):
+1. List every task the user actually said, in spoken order.
+2. DELETE cancelled tasks: any task immediately before phrases like "never mind", "wait never mind", "scratch that", "actually no", "wait no", "cancel that", "skip X", "not X Y instead", "almost said X but not today" — gone, not in any field. The replacement task takes its place.
+3. DELETE duplicate wordings: "email Sam" and "send Sam an email" mean the same action — keep the cleanest wording ONCE.
+4. DELETE tasks for OTHER days: anything framed for "tomorrow", "next week", "later", or "not today" is gone, UNLESS user said to prepare/schedule it today.
+5. COLLAPSE substeps under a named parent task: if the user says a parent name then lists steps, output the parent only.
+6. Count what remains. If ≤3, selectedTasks=all, extraCandidates=[]. If >3, selectedTasks=first 3, extraCandidates=rest.
+
+ALSO:
+- No inference. "Call the doctor" ≠ "schedule appointment". Keep vague tasks vague ("figure out taxes", not "file return").
+- "Don't X" / "stay off X" / "avoid X" — keep negative phrasing exactly as said.
+
+EXAMPLES (study patterns carefully):
+
+Transcript: Write the report, actually no, write the brief.
+Output: {"containsActionableTasks":true,"selectedTasks":["write the brief"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Call Bob, wait never mind, call Alice.
+Output: {"containsActionableTasks":true,"selectedTasks":["call Alice"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Pay rent, send Jamie the email, email Jamie about the thing.
+Output: {"containsActionableTasks":true,"selectedTasks":["pay rent","email Jamie"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Email Sam, pay rent, buy milk, call mom.
+Output: {"containsActionableTasks":true,"selectedTasks":["email Sam","pay rent","buy milk"],"extraCandidates":["call mom"],"detectedMoreThanThree":true}
+
+Transcript: Tomorrow call Mark. Today pay the bills.
+Output: {"containsActionableTasks":true,"selectedTasks":["pay the bills"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: For the newsletter, write the headline, draft the copy, and send.
+Output: {"containsActionableTasks":true,"selectedTasks":["finish the newsletter"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Don't open Instagram today.
+Output: {"containsActionableTasks":true,"selectedTasks":["don't open Instagram"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Hello hello, just testing.
+Output: {"containsActionableTasks":false,"selectedTasks":[],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Now do this one. Output JSON only, no prose.
+
+Transcript: {TRANSCRIPT}
+Output:

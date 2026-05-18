@@ -1,0 +1,23 @@
+{
+  "case_id": "correction_never_mind_single",
+  "transcript": "Go to the park, wait never mind, go to the store.",
+  "steps": [
+    {
+      "full": "Go to the park",
+      "fragment": "Go to the park",
+      "finished": false,
+      "calls": [
+        {"tool": "add_task", "text": "go to the park"}
+      ]
+    },
+    {
+      "full": "Go to the park, wait never mind, go to the store.",
+      "fragment": ", wait never mind, go to the store.",
+      "finished": true,
+      "calls": [
+        {"tool": "delete_task", "pool": "selected", "slot": 0},
+        {"tool": "add_task", "text": "go to the store"}
+      ]
+    }
+  ]
+}

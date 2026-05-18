@@ -77,27 +77,31 @@ The current shippable milestone is a **voice-first local-AI TestFlight MVP** (ca
   - `VoiceCaptureView`
 
 - `ThreeThings/Services/Extraction/`
-  - Provider abstraction for task extraction.
-  - Mock extraction providers for local development.
-  - Placeholder cloud providers exist in code, but MVP extraction direction is Apple Foundation Models on device.
+  - `VoiceDraftExtracting` provider protocol; `HeuristicVoiceDraftExtractor` for simulator/tests.
+  - `FoundationModelsVoiceDraftExtractor` calls Apple FM on device with a `@Generable` `GeneratedVoiceDraft` schema and the v12 extraction prompt.
+  - `VoiceDraftPostProcessor.buildDraft` applies deterministic repair after the model: exact + semantic (Jaccard ≥ 0.55) dedup, promote extras → selected when room, cap at 3, recompute overflow.
+  - `Eval/` contains the on-device eval runner + scorer; off-device prompt iteration lives in `evals/` (Python, Groq proxy).
 
 - `ThreeThings/Services/Speech/`
-  - `SpeechCaptureManager`, intended to wrap on-device speech recognition.
+  - `SpeechCaptureManager` orchestrates `AVAudioRecorder` + `SpeechAnalyzer`/`SpeechTranscriber`.
+  - `LiveSpeechCapture` streams partial transcripts during recording (`SFSpeechRecognizer` + `AVAudioEngine` on device; scripted mock in simulator).
 
 - `ThreeThings/Utilities/`
   - `FocusDay`, which owns focus-day identity and rollover logic.
 
 ### Voice And Extraction Direction
 
-Voice capture and local LLM extraction are part of the MVP direction, not a later add-on.
+Voice capture and local LLM extraction are implemented and the primary MVP path.
 
-Planned flow:
+Current flow:
 
-1. User records speech.
-2. Speech is transcribed on device with Apple SpeechAnalyzer/SpeechTranscriber.
-3. Transcript is processed locally by Apple Foundation Models.
-4. The local model returns structured tasks, extras, and overflow metadata.
-5. User reviews the extracted tasks before locking.
+1. User records speech via `SpeechCaptureManager`; `LiveSpeechCapture` streams partial transcripts.
+2. Partials feed `AppViewModel.updateVoiceTranscriptSnapshot`, which debounces and runs **live extraction** through `FoundationModelsVoiceDraftExtractor` while the user is still speaking; on stop, a final flush runs immediately.
+3. The extractor sends the transcript through the v12 prompt to Apple Foundation Models with `@Generable` schema enforcement (`GeneratedVoiceDraft`).
+4. `VoiceDraftPostProcessor.buildDraft` applies deterministic repair (dedup, extras→selected promotion, overflow recompute).
+5. User reviews the resulting `VoiceExtractionDraft` (selected + extras + overflow flag) before locking. Editing the draft pauses live re-extraction; "Apply latest voice" resyncs.
+
+Extraction behavior is specified in `extraction_behavior.md` and exercised by `ThreeThings/Fixtures/voice_extraction_cases.json` (25 cases × 5 variants spanning literal, overflow, correction, duplicate, no-task, inference-trap, vague, substep, future-day, negative-commitment, ramble categories). Both an on-device Swift eval runner (`ThreeThings/Services/Extraction/Eval/`) and an off-device Python eval harness (`evals/`, Groq llama-3.1-8b proxy) test the prompt against this fixture.
 
 Important privacy/current-design notes:
 
@@ -112,9 +116,15 @@ Important privacy/current-design notes:
 
 ### Immediate MVP Work
 
-- Replace the voice placeholder with real SpeechAnalyzer/SpeechTranscriber capture.
-- Implement Apple Foundation Models extraction for 1-3 tasks, extras, and overflow.
-- Finish the voice/text capture, validation, review, and lock flow.
+Done:
+
+- Real SpeechAnalyzer/SpeechTranscriber + live partial capture via `LiveSpeechCapture` + `SpeechCaptureManager`.
+- Apple Foundation Models extraction (`FoundationModelsVoiceDraftExtractor`) returning structured `selectedTasks` / `extraCandidates` / `detectedMoreThanThree`.
+- Voice + text capture, validation, review, and lock flow.
+- Off-device eval harness for prompt iteration (Python + Groq proxy) and on-device Swift eval runner.
+
+Remaining:
+
 - Ensure locked plans persist correctly across app launches.
 - Complete focus-day rollover behavior.
 - Finalize the exact focus-day boundary decision and update docs/code consistently.
@@ -122,6 +132,7 @@ Important privacy/current-design notes:
 - Implement rolling 7-day momentum storage and display.
 - Add unit tests for focus-day calculation, persistence, validation, and momentum logic.
 - Add UI tests for the basic flow: type tasks -> review -> lock -> complete.
+- Continue extraction-quality iteration: push every behavior category in `extraction_behavior.md` to avg@5 ≥ 4.5 on the on-device eval; consider an Apple FM LoRA adapter once production transcripts are available.
 
 ### Product Polish Before TestFlight
 

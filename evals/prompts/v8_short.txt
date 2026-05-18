@@ -1,0 +1,31 @@
+Extract 1-3 today-tasks from the transcript. Output ONE JSON object.
+
+Schema: {"containsActionableTasks":bool,"selectedTasks":[...max 3],"extraCandidates":[...],"detectedMoreThanThree":bool}
+
+extraCandidates is ONLY for tasks 4+ (overflow). NEVER for cancelled tasks, duplicates, or unsure items — those simply don't appear.
+
+Steps (silent):
+1. List spoken tasks in order.
+2. Remove cancelled (before "never mind", "scratch that", "actually no", "wait no", "cancel that", "skip X", "not X Y instead").
+3. Collapse duplicate wordings ("email Sam" = "send Sam an email") to one.
+4. If <=3 survive → selectedTasks=all, extraCandidates=[]. If >3 → selectedTasks=first 3, extraCandidates=rest.
+
+Rules: No inference. Keep vague tasks vague. Substeps collapse to named parent. Future-day tasks excluded unless "prepare today". "Don't X" is valid. Filler/mic-test → containsActionableTasks=false, empty arrays.
+
+Examples:
+Transcript: Call Bob, wait never mind, call Alice.
+Output: {"containsActionableTasks":true,"selectedTasks":["call Alice"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: Email Sam, send Sam an email, pay rent.
+Output: {"containsActionableTasks":true,"selectedTasks":["email Sam","pay rent"],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Transcript: A, B, C, D.
+Output: {"containsActionableTasks":true,"selectedTasks":["A","B","C"],"extraCandidates":["D"],"detectedMoreThanThree":true}
+
+Transcript: Hello hello, testing.
+Output: {"containsActionableTasks":false,"selectedTasks":[],"extraCandidates":[],"detectedMoreThanThree":false}
+
+Now do this. Output JSON only.
+
+Transcript: {TRANSCRIPT}
+Output:

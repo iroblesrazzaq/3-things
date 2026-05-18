@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 3,
   "cases": [
     {
       "id": "literal_three_store_park_food",
@@ -25,7 +25,177 @@
         "prepare dinner",
         "organize errands"
       ],
-      "notes": "Literal three tasks; no invention."
+      "notes": "Literal three tasks; no invention.",
+      "livePartials": [
+        "Go",
+        "Go to",
+        "Go to a store",
+        "Go to a store, go",
+        "Go to a store, go to the park",
+        "Go to a store, go to the park, and",
+        "Go to a store, go to the park, and eat food."
+      ],
+      "liveSnapshots": [
+        "Go to a store",
+        "Go to a store, go to the park",
+        "Go to a store, go to the park, and eat food."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "go to a store"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to the park",
+            "eat food",
+            "buy groceries"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "go to a store",
+            "go to the park"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "eat food",
+            "buy groceries"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "go to a store",
+            "go to the park",
+            "eat food"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy groceries",
+            "enjoy the park",
+            "prepare dinner"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "literal_one_email",
+      "category": "literal",
+      "transcriptVariants": [
+        "Email Sam.",
+        "Uh, email Sam. That's the main thing.",
+        "I need to email Sam today.",
+        "Could you put email Sam as my thing?",
+        "Email Sam about the proposal."
+      ],
+      "expectedSelectedMeanings": [
+        "email Sam"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "write proposal",
+        "schedule meeting with Sam",
+        "follow up with client"
+      ],
+      "notes": "Single literal task; no inference about proposal or follow-up.",
+      "liveSnapshots": [
+        "Email Sam."
+      ],
+      "livePartials": [
+        "Email",
+        "Email Sam."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "write proposal",
+            "schedule meeting with Sam",
+            "follow up with client"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "literal"
+        }
+      ]
+    },
+    {
+      "id": "literal_two_call_and_pay",
+      "category": "literal",
+      "transcriptVariants": [
+        "Call mom and pay rent.",
+        "Um, call mom, uh, and pay rent.",
+        "Today, call my mom and pay rent.",
+        "The two things are call mom and pay the rent.",
+        "I need to call mom. Also pay rent."
+      ],
+      "expectedSelectedMeanings": [
+        "call mom",
+        "pay rent"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "visit mom",
+        "budget finances",
+        "pay bills generally"
+      ],
+      "notes": "Two literal tasks; no generalization.",
+      "liveSnapshots": [
+        "Call mom",
+        "Call mom and pay rent."
+      ],
+      "livePartials": [
+        "Call",
+        "Call mom",
+        "Call",
+        "Call mom",
+        "Call mom and",
+        "Call mom and pay",
+        "Call mom and pay rent."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "call mom"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "budget finances",
+            "pay bills generally",
+            "pay rent",
+            "visit mom"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "call mom",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "budget finances",
+            "pay bills generally",
+            "visit mom"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
     },
     {
       "id": "overflow_four_clean",
@@ -52,7 +222,423 @@
         "family planning",
         "financial planning"
       ],
-      "notes": "Four distinct tasks; fourth in extras; overflow true."
+      "notes": "Four distinct tasks; fourth in extras; overflow true.",
+      "livePartials": [
+        "Email Sam",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent, buy milk",
+        "Email Sam, pay rent, buy milk, call mom"
+      ],
+      "liveSnapshots": [
+        "Email Sam",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent, buy milk",
+        "Email Sam, pay rent, buy milk, call mom"
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay rent",
+            "buy milk",
+            "call mom"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy milk",
+            "call mom"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent",
+            "buy milk"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call mom"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent",
+            "buy milk"
+          ],
+          "extraMeanings": [
+            "call mom"
+          ],
+          "forbiddenMeanings": [
+            "grocery shopping beyond milk"
+          ],
+          "expectedOverflow": true,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "overflow_six_messy",
+      "category": "overflow",
+      "transcriptVariants": [
+        "Uh today I need to finish the deck, call Alex, book dentist, buy milk, clean the kitchen, and return the package.",
+        "So, finish the deck, um, call Alex, book the dentist, buy milk, clean kitchen, return package.",
+        "I have too much. Finish deck. Call Alex. Dentist. Milk. Kitchen. Return package.",
+        "The things are finish the deck, call Alex, book a dentist appointment, buy milk, clean the kitchen, and return the package.",
+        "Okay, finish deck, call Alex, book dentist, buy milk, clean kitchen, return package, that's too many."
+      ],
+      "expectedSelectedMeanings": [
+        "finish the deck",
+        "call Alex",
+        "book dentist"
+      ],
+      "expectedExtraMeanings": [
+        "buy milk",
+        "clean the kitchen",
+        "return the package"
+      ],
+      "expectedOverflow": true,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "prepare presentation",
+        "go to dentist",
+        "grocery shopping beyond buy milk"
+      ],
+      "notes": "Six distinct tasks; first three selected, remaining three in extras.",
+      "liveSnapshots": [
+        "Finish the deck",
+        "Finish the deck, call Alex",
+        "Finish the deck, call Alex, book dentist",
+        "Finish the deck, call Alex, book dentist, buy milk",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen, return the package"
+      ],
+      "livePartials": [
+        "Finish",
+        "Finish the",
+        "Finish the deck",
+        "Finish",
+        "Finish the",
+        "Finish the deck",
+        "Finish the deck,",
+        "Finish the deck, call",
+        "Finish the deck, call Alex",
+        "Finish",
+        "Finish the",
+        "Finish the deck",
+        "Finish the deck,",
+        "Finish the deck, call",
+        "Finish the deck, call Alex",
+        "Finish the deck, call Alex,",
+        "Finish the deck, call Alex, book",
+        "Finish the deck, call Alex, book dentist",
+        "Finish",
+        "Finish the",
+        "Finish the deck",
+        "Finish the deck,",
+        "Finish the deck, call",
+        "Finish the deck, call Alex",
+        "Finish the deck, call Alex,",
+        "Finish the deck, call Alex, book",
+        "Finish the deck, call Alex, book dentist",
+        "Finish the deck, call Alex, book dentist,",
+        "Finish the deck, call Alex, book dentist, buy",
+        "Finish the deck, call Alex, book dentist, buy milk",
+        "Finish",
+        "Finish the",
+        "Finish the deck",
+        "Finish the deck,",
+        "Finish the deck, call",
+        "Finish the deck, call Alex",
+        "Finish the deck, call Alex,",
+        "Finish the deck, call Alex, book",
+        "Finish the deck, call Alex, book dentist",
+        "Finish the deck, call Alex, book dentist,",
+        "Finish the deck, call Alex, book dentist, buy",
+        "Finish the deck, call Alex, book dentist, buy milk",
+        "Finish the deck, call Alex, book dentist, buy milk,",
+        "Finish the deck, call Alex, book dentist, buy milk, clean",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen",
+        "Finish",
+        "Finish the",
+        "Finish the deck",
+        "Finish the deck,",
+        "Finish the deck, call",
+        "Finish the deck, call Alex",
+        "Finish the deck, call Alex,",
+        "Finish the deck, call Alex, book",
+        "Finish the deck, call Alex, book dentist",
+        "Finish the deck, call Alex, book dentist,",
+        "Finish the deck, call Alex, book dentist, buy",
+        "Finish the deck, call Alex, book dentist, buy milk",
+        "Finish the deck, call Alex, book dentist, buy milk,",
+        "Finish the deck, call Alex, book dentist, buy milk, clean",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen,",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen, return",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen, return the",
+        "Finish the deck, call Alex, book dentist, buy milk, clean the kitchen, return the package"
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "finish the deck"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "book dentist",
+            "buy milk",
+            "call Alex",
+            "clean the kitchen",
+            "go to dentist",
+            "grocery shopping beyond buy milk",
+            "prepare presentation",
+            "return the package"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "finish the deck",
+            "call Alex"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "book dentist",
+            "buy milk",
+            "clean the kitchen",
+            "go to dentist",
+            "grocery shopping beyond buy milk",
+            "prepare presentation",
+            "return the package"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "finish the deck",
+            "call Alex",
+            "book dentist"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy milk",
+            "clean the kitchen",
+            "go to dentist",
+            "grocery shopping beyond buy milk",
+            "prepare presentation",
+            "return the package"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "finish the deck",
+            "call Alex",
+            "book dentist"
+          ],
+          "extraMeanings": [
+            "buy milk"
+          ],
+          "forbiddenMeanings": [
+            "clean the kitchen",
+            "go to dentist",
+            "grocery shopping beyond buy milk",
+            "prepare presentation",
+            "return the package"
+          ],
+          "expectedOverflow": true,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "finish the deck",
+            "call Alex",
+            "book dentist"
+          ],
+          "extraMeanings": [
+            "buy milk",
+            "clean the kitchen"
+          ],
+          "forbiddenMeanings": [
+            "go to dentist",
+            "grocery shopping beyond buy milk",
+            "prepare presentation",
+            "return the package"
+          ],
+          "expectedOverflow": true,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "finish the deck",
+            "call Alex",
+            "book dentist"
+          ],
+          "extraMeanings": [
+            "buy milk",
+            "clean the kitchen",
+            "return the package"
+          ],
+          "forbiddenMeanings": [
+            "go to dentist",
+            "grocery shopping beyond buy milk",
+            "prepare presentation"
+          ],
+          "expectedOverflow": true,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "overflow_one_extra_only",
+      "category": "overflow",
+      "transcriptVariants": [
+        "Do laundry, submit timesheet, text Jamie, and take out trash.",
+        "Um, laundry, submit the timesheet, text Jamie, take out trash.",
+        "I need to do laundry. Submit timesheet. Text Jamie. Take out the trash.",
+        "The tasks are do laundry, submit my timesheet, text Jamie, take out trash.",
+        "Do the laundry, submit timesheet, text Jamie, and trash."
+      ],
+      "expectedSelectedMeanings": [
+        "do laundry",
+        "submit timesheet",
+        "text Jamie"
+      ],
+      "expectedExtraMeanings": [
+        "take out trash"
+      ],
+      "expectedOverflow": true,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "clean house",
+        "message team",
+        "organize chores"
+      ],
+      "notes": "Four tasks; one extra; overflow true.",
+      "liveSnapshots": [
+        "Do laundry",
+        "Do laundry, submit timesheet",
+        "Do laundry, submit timesheet, text Jamie",
+        "Do laundry, submit timesheet, text Jamie, and take out trash."
+      ],
+      "livePartials": [
+        "Do",
+        "Do laundry",
+        "Do",
+        "Do laundry",
+        "Do laundry,",
+        "Do laundry, submit",
+        "Do laundry, submit timesheet",
+        "Do",
+        "Do laundry",
+        "Do laundry,",
+        "Do laundry, submit",
+        "Do laundry, submit timesheet",
+        "Do laundry, submit timesheet,",
+        "Do laundry, submit timesheet, text",
+        "Do laundry, submit timesheet, text Jamie",
+        "Do",
+        "Do laundry",
+        "Do laundry,",
+        "Do laundry, submit",
+        "Do laundry, submit timesheet",
+        "Do laundry, submit timesheet,",
+        "Do laundry, submit timesheet, text",
+        "Do laundry, submit timesheet, text Jamie",
+        "Do laundry, submit timesheet, text Jamie,",
+        "Do laundry, submit timesheet, text Jamie, and",
+        "Do laundry, submit timesheet, text Jamie, and take",
+        "Do laundry, submit timesheet, text Jamie, and take out",
+        "Do laundry, submit timesheet, text Jamie, and take out trash."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "do laundry"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "clean house",
+            "message team",
+            "organize chores",
+            "submit timesheet",
+            "take out trash",
+            "text Jamie"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "do laundry",
+            "submit timesheet"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "clean house",
+            "message team",
+            "organize chores",
+            "take out trash",
+            "text Jamie"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "do laundry",
+            "submit timesheet",
+            "text Jamie"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "clean house",
+            "message team",
+            "organize chores",
+            "take out trash"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "do laundry",
+            "submit timesheet",
+            "text Jamie"
+          ],
+          "extraMeanings": [
+            "take out trash"
+          ],
+          "forbiddenMeanings": [
+            "clean house",
+            "message team",
+            "organize chores"
+          ],
+          "expectedOverflow": true,
+          "expectsNoDraft": false
+        }
+      ]
     },
     {
       "id": "correction_never_mind_single",
@@ -74,53 +660,214 @@
         "go to the park",
         "buy groceries"
       ],
-      "notes": "Canceled park; final intent is store only."
+      "notes": "Canceled park; final intent is store only.",
+      "livePartials": [
+        "Go to the park",
+        "Go to the park, wait",
+        "Go to the park, wait never mind",
+        "Go to the park, wait never mind, go",
+        "Go to the park, wait never mind, go to the store."
+      ],
+      "liveSnapshots": [
+        "Go to the park",
+        "Go to the park, wait never mind, go to the store."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "go to the park"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to the store",
+            "buy groceries"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "allowedTools": [
+            "add_task",
+            "no_action"
+          ]
+        },
+        {
+          "selectedMeanings": [
+            "go to the store"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to the park",
+            "buy groceries"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "correction",
+          "requiredToolsAny": [
+            "delete_task",
+            "revise_task",
+            "add_task",
+            "clear_draft"
+          ]
+        }
+      ]
     },
     {
-      "id": "no_task_testing",
-      "category": "no_task",
+      "id": "correction_replace_call_with_text",
+      "category": "correction",
       "transcriptVariants": [
-        "Hello? Testing, testing.",
-        "Um, hello, is this working?",
-        "Testing one two three.",
-        "Uh, I don't know, just testing the mic.",
-        "This is a test. Hello hello."
-      ],
-      "expectedSelectedMeanings": [],
-      "expectedExtraMeanings": [],
-      "expectedOverflow": false,
-      "expectsNoDraft": true,
-      "forbiddenMeanings": [
-        "prepare for meeting",
-        "review emails",
-        "call client",
-        "organize workspace",
-        "set reminders"
-      ],
-      "notes": "Mic test / no actionable tasks; extractor should surface empty output (throw emptyModelOutput)."
-    },
-    {
-      "id": "inference_store_only",
-      "category": "inference_trap",
-      "transcriptVariants": [
-        "Go to the store.",
-        "Uh, go to a store.",
-        "I need to go to the store today.",
-        "Put go to the store.",
-        "The only thing is go to the store."
+        "Call Alex, actually make that text Alex.",
+        "I need to call Alex. Wait, no, text Alex instead.",
+        "Call Alex, scratch that, text Alex.",
+        "Uh, text Alex, not call Alex.",
+        "Put text Alex. I said call at first but I mean text."
       ],
       "expectedSelectedMeanings": [
-        "go to the store"
+        "text Alex"
       ],
       "expectedExtraMeanings": [],
       "expectedOverflow": false,
       "expectsNoDraft": false,
       "forbiddenMeanings": [
-        "buy groceries",
-        "buy milk",
-        "run errands"
+        "call Alex",
+        "schedule with Alex"
       ],
-      "notes": "Do not infer shopping list from store alone."
+      "notes": "Replacement correction; only the corrected task survives.",
+      "liveSnapshots": [
+        "Call Alex",
+        "Call Alex, actually make that text Alex."
+      ],
+      "livePartials": [
+        "Call",
+        "Call Alex",
+        "Call",
+        "Call Alex",
+        "Call Alex,",
+        "Call Alex, actually",
+        "Call Alex, actually make",
+        "Call Alex, actually make that",
+        "Call Alex, actually make that text",
+        "Call Alex, actually make that text Alex."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "call Alex"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "text Alex",
+            "schedule with Alex"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "text Alex"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call Alex",
+            "schedule with Alex"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "correction"
+        }
+      ]
+    },
+    {
+      "id": "correction_remove_one_keep_others",
+      "category": "correction",
+      "transcriptVariants": [
+        "Email Sam, go to the gym, actually skip gym, and pay rent.",
+        "Email Sam, gym, no gym today, pay rent.",
+        "I need email Sam, go gym, wait never mind on gym, pay rent.",
+        "Email Sam. Scratch going to the gym. Pay rent.",
+        "Put email Sam and pay rent. I almost said gym but not today."
+      ],
+      "expectedSelectedMeanings": [
+        "email Sam",
+        "pay rent"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "go to gym",
+        "exercise"
+      ],
+      "notes": "Removed one mid-list task; others preserved.",
+      "liveSnapshots": [
+        "Email Sam",
+        "Email Sam, go to the gym",
+        "Email Sam, go to the gym, actually skip gym, and pay rent."
+      ],
+      "livePartials": [
+        "Email",
+        "Email Sam",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, go",
+        "Email Sam, go to",
+        "Email Sam, go to the",
+        "Email Sam, go to the gym",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, go",
+        "Email Sam, go to",
+        "Email Sam, go to the",
+        "Email Sam, go to the gym",
+        "Email Sam, go to the gym,",
+        "Email Sam, go to the gym, actually",
+        "Email Sam, go to the gym, actually skip",
+        "Email Sam, go to the gym, actually skip gym",
+        "Email Sam, go to the gym, actually skip gym,",
+        "Email Sam, go to the gym, actually skip gym, and",
+        "Email Sam, go to the gym, actually skip gym, and pay",
+        "Email Sam, go to the gym, actually skip gym, and pay rent."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to gym",
+            "pay rent"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "go to gym"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay rent"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to gym",
+            "exercise"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "correction"
+        }
+      ]
     },
     {
       "id": "duplicate_email_sam",
@@ -143,7 +890,355 @@
         "follow up with Sam as a separate task",
         "write email draft as separate from send email"
       ],
-      "notes": "Duplicate phrasing should collapse to one email-Sam task."
+      "notes": "Duplicate phrasing should collapse to one email-Sam task.",
+      "livePartials": [
+        "Email Sam",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent, send Sam an email"
+      ],
+      "liveSnapshots": [
+        "Email Sam",
+        "Email Sam, pay rent, send Sam an email"
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay rent",
+            "follow up with Sam as a separate task"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "follow up with Sam as a separate task",
+            "write email draft as separate from send email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "duplicate_grocery_wording",
+      "category": "duplicate",
+      "transcriptVariants": [
+        "Buy milk, get milk from the store, and call mom.",
+        "Uh buy milk, pick up milk, call mom.",
+        "Need milk, buy milk, and call mom.",
+        "Go get milk, buy milk, call mom.",
+        "Milk from store, buy milk, call mom."
+      ],
+      "expectedSelectedMeanings": [
+        "buy milk",
+        "call mom"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "grocery shopping generally"
+      ],
+      "notes": "Milk rephrased multiple ways; collapse to one task.",
+      "liveSnapshots": [
+        "Buy milk",
+        "Buy milk, get milk from the store, and call mom."
+      ],
+      "livePartials": [
+        "Buy",
+        "Buy milk",
+        "Buy",
+        "Buy milk",
+        "Buy milk,",
+        "Buy milk, get",
+        "Buy milk, get milk",
+        "Buy milk, get milk from",
+        "Buy milk, get milk from the",
+        "Buy milk, get milk from the store",
+        "Buy milk, get milk from the store,",
+        "Buy milk, get milk from the store, and",
+        "Buy milk, get milk from the store, and call",
+        "Buy milk, get milk from the store, and call mom."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "buy milk"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call mom",
+            "grocery shopping generally"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "buy milk",
+            "call mom"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "grocery shopping generally"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "no_task_testing",
+      "category": "no_task",
+      "transcriptVariants": [
+        "Hello? Testing, testing.",
+        "Um, hello, is this working?",
+        "Testing one two three.",
+        "Uh, I don't know, just testing the mic.",
+        "This is a test. Hello hello."
+      ],
+      "expectedSelectedMeanings": [],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": true,
+      "forbiddenMeanings": [
+        "prepare for meeting",
+        "review emails",
+        "call client",
+        "organize workspace",
+        "set reminders"
+      ],
+      "notes": "Mic test / no actionable tasks; extractor should return empty (containsActionableTasks=false).",
+      "livePartials": [
+        "Testing",
+        "Testing, testing",
+        "Testing, testing, one two",
+        "Testing, testing, one two three."
+      ],
+      "liveSnapshots": [
+        "Testing, testing, one two three."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "prepare for meeting",
+            "review emails",
+            "call client",
+            "organize workspace"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": true
+        }
+      ]
+    },
+    {
+      "id": "no_task_random_talk",
+      "category": "no_task",
+      "transcriptVariants": [
+        "I'm tired and I don't really know what I'm doing today.",
+        "Uh, today feels weird. I need coffee.",
+        "I'm just talking to see what happens.",
+        "So yeah, lots going on, not sure yet.",
+        "I don't have tasks right now."
+      ],
+      "expectedSelectedMeanings": [],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": true,
+      "forbiddenMeanings": [
+        "plan day",
+        "rest",
+        "organize priorities",
+        "get coffee",
+        "make coffee",
+        "drink coffee"
+      ],
+      "notes": "Open-ended talk; product decision: 'I need coffee' is context, not a task.",
+      "liveSnapshots": [
+        "I'm tired and I don't really know what I'm doing today."
+      ],
+      "livePartials": [
+        "I'm",
+        "I'm tired",
+        "I'm tired and",
+        "I'm tired and I",
+        "I'm tired and I don't",
+        "I'm tired and I don't really",
+        "I'm tired and I don't really know",
+        "I'm tired and I don't really know what",
+        "I'm tired and I don't really know what I'm",
+        "I'm tired and I don't really know what I'm doing",
+        "I'm tired and I don't really know what I'm doing today."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "plan day",
+            "rest",
+            "organize priorities",
+            "get coffee",
+            "make coffee",
+            "drink coffee"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": true
+        }
+      ]
+    },
+    {
+      "id": "inference_store_only",
+      "category": "inference_trap",
+      "transcriptVariants": [
+        "Go to the store.",
+        "Uh, go to a store.",
+        "I need to go to the store today.",
+        "Put go to the store.",
+        "The only thing is go to the store."
+      ],
+      "expectedSelectedMeanings": [
+        "go to the store"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "buy groceries",
+        "buy milk",
+        "run errands"
+      ],
+      "notes": "Do not infer shopping list from store alone.",
+      "livePartials": [
+        "I need to",
+        "I need to go to",
+        "I need to go to the store",
+        "I need to go to the store today."
+      ],
+      "liveSnapshots": [
+        "I need to go to the store today."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "go to the store"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy groceries",
+            "buy milk",
+            "run errands"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "inference_eat_food_only",
+      "category": "inference_trap",
+      "transcriptVariants": [
+        "Eat food.",
+        "Uh, eat food today.",
+        "I need to eat lunch.",
+        "Put eat food as a thing.",
+        "Honestly just eat a meal."
+      ],
+      "expectedSelectedMeanings": [
+        "eat food"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "prepare dinner",
+        "cook meal",
+        "meal prep",
+        "grocery shop"
+      ],
+      "notes": "Do not infer cooking or shopping from eat food.",
+      "liveSnapshots": [
+        "Eat food."
+      ],
+      "livePartials": [
+        "Eat",
+        "Eat food."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "eat food"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "prepare dinner",
+            "cook meal",
+            "meal prep",
+            "grocery shop"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "inference_trap"
+        }
+      ]
+    },
+    {
+      "id": "inference_doctor",
+      "category": "inference_trap",
+      "transcriptVariants": [
+        "Call the doctor.",
+        "Uh call my doctor.",
+        "I need to call the doctor today.",
+        "Call the doctor office.",
+        "Put call doctor."
+      ],
+      "expectedSelectedMeanings": [
+        "call the doctor"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "schedule appointment",
+        "go to doctor",
+        "refill prescription"
+      ],
+      "notes": "Calling != scheduling != visiting; preserve stated action.",
+      "liveSnapshots": [
+        "Call the doctor."
+      ],
+      "livePartials": [
+        "Call",
+        "Call the",
+        "Call the doctor."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "call the doctor"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "schedule appointment",
+            "go to doctor",
+            "refill prescription"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "inference_trap"
+        }
+      ]
     },
     {
       "id": "ramble_two_clear_tasks",
@@ -167,7 +1262,1432 @@
         "plan work",
         "reduce stress"
       ],
-      "notes": "Filler ignored; two explicit tasks remain."
+      "notes": "Filler ignored; two explicit tasks remain.",
+      "liveSnapshots": [
+        "I have a lot going on, um, but really today I need to finish the deck and book the dentist."
+      ],
+      "livePartials": [
+        "I",
+        "I have",
+        "I have a",
+        "I have a lot",
+        "I have a lot going",
+        "I have a lot going on",
+        "I have a lot going on,",
+        "I have a lot going on, um",
+        "I have a lot going on, um,",
+        "I have a lot going on, um, but",
+        "I have a lot going on, um, but really",
+        "I have a lot going on, um, but really today",
+        "I have a lot going on, um, but really today I",
+        "I have a lot going on, um, but really today I need",
+        "I have a lot going on, um, but really today I need to",
+        "I have a lot going on, um, but really today I need to finish",
+        "I have a lot going on, um, but really today I need to finish the",
+        "I have a lot going on, um, but really today I need to finish the deck",
+        "I have a lot going on, um, but really today I need to finish the deck and",
+        "I have a lot going on, um, but really today I need to finish the deck and book",
+        "I have a lot going on, um, but really today I need to finish the deck and book the",
+        "I have a lot going on, um, but really today I need to finish the deck and book the dentist."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "finish the deck",
+            "book dentist"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "manage health",
+            "plan work",
+            "reduce stress"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "ramble"
+        }
+      ]
+    },
+    {
+      "id": "ramble_three_clear_tasks",
+      "category": "ramble",
+      "transcriptVariants": [
+        "Um okay so today I need to ship the build, reply to Nora, and clean my desk. That's it.",
+        "Lots of stuff, but only three: ship build, reply to Nora, clean desk.",
+        "I guess the three are ship the build, reply to Nora, and clean the desk.",
+        "Ship the app build. Reply to Nora. Clean desk. The rest can wait.",
+        "For focus today: ship build, reply to Nora, clean my desk."
+      ],
+      "expectedSelectedMeanings": [
+        "ship the build",
+        "reply to Nora",
+        "clean desk"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "prepare release notes",
+        "organize office",
+        "message team"
+      ],
+      "notes": "Three explicit tasks amid filler.",
+      "liveSnapshots": [
+        "Um okay so today I need to ship the build, reply to Nora, and clean my desk. That's it."
+      ],
+      "livePartials": [
+        "Um",
+        "Um okay",
+        "Um okay so",
+        "Um okay so today",
+        "Um okay so today I",
+        "Um okay so today I need",
+        "Um okay so today I need to",
+        "Um okay so today I need to ship",
+        "Um okay so today I need to ship the",
+        "Um okay so today I need to ship the build",
+        "Um okay so today I need to ship the build,",
+        "Um okay so today I need to ship the build, reply",
+        "Um okay so today I need to ship the build, reply to",
+        "Um okay so today I need to ship the build, reply to Nora",
+        "Um okay so today I need to ship the build, reply to Nora,",
+        "Um okay so today I need to ship the build, reply to Nora, and",
+        "Um okay so today I need to ship the build, reply to Nora, and clean",
+        "Um okay so today I need to ship the build, reply to Nora, and clean my",
+        "Um okay so today I need to ship the build, reply to Nora, and clean my desk.",
+        "Um okay so today I need to ship the build, reply to Nora, and clean my desk. That's",
+        "Um okay so today I need to ship the build, reply to Nora, and clean my desk. That's it."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "ship the build",
+            "reply to Nora",
+            "clean desk"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "prepare release notes",
+            "organize office",
+            "message team"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "ramble"
+        }
+      ]
+    },
+    {
+      "id": "vague_taxes",
+      "category": "vague",
+      "transcriptVariants": [
+        "Figure out taxes.",
+        "Uh, deal with taxes.",
+        "I need to handle tax stuff today.",
+        "Put taxes as one thing, I know it's vague.",
+        "Work on taxes for an hour."
+      ],
+      "expectedSelectedMeanings": [
+        "taxes"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "file tax return",
+        "call accountant",
+        "gather receipts"
+      ],
+      "notes": "Preserve vague task as stated; do not over-specify.",
+      "livePartials": [
+        "I should",
+        "I should figure out",
+        "I should figure out taxes",
+        "I should figure out taxes this week."
+      ],
+      "liveSnapshots": [
+        "I should figure out taxes this week."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "taxes"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "file tax return",
+            "call accountant",
+            "gather receipts"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "vague"
+        }
+      ]
+    },
+    {
+      "id": "vague_apartment",
+      "category": "vague",
+      "transcriptVariants": [
+        "Deal with apartment stuff.",
+        "Um, handle the apartment situation.",
+        "I need to work on apartment things today.",
+        "Apartment stuff, that's one of the things.",
+        "Figure out the apartment issue."
+      ],
+      "expectedSelectedMeanings": [
+        "apartment"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "call landlord",
+        "pay rent",
+        "clean apartment"
+      ],
+      "notes": "Preserve vague apartment commitment as stated.",
+      "liveSnapshots": [
+        "Deal with apartment stuff."
+      ],
+      "livePartials": [
+        "Deal",
+        "Deal with",
+        "Deal with apartment",
+        "Deal with apartment stuff."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "apartment"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call landlord",
+            "pay rent",
+            "clean apartment"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "vague"
+        }
+      ]
+    },
+    {
+      "id": "substeps_launch_email",
+      "category": "subtasks",
+      "transcriptVariants": [
+        "For the launch email, write the subject line, draft the body, and send it.",
+        "Launch email: subject line, body, send it.",
+        "I need to finish the launch email, like subject, body, and send.",
+        "Work on launch email: write subject, draft body, send.",
+        "The thing is finish launch email. Steps are subject, body, send."
+      ],
+      "expectedSelectedMeanings": [
+        "finish launch email"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "write subject line",
+        "draft body",
+        "send email"
+      ],
+      "notes": "Substeps collapse under named parent task.",
+      "liveSnapshots": [
+        "For the launch email, write the subject line",
+        "For the launch email, write the subject line, draft the body, and send it."
+      ],
+      "livePartials": [
+        "For",
+        "For the",
+        "For the launch",
+        "For the launch email",
+        "For the launch email,",
+        "For the launch email, write",
+        "For the launch email, write the",
+        "For the launch email, write the subject",
+        "For the launch email, write the subject line",
+        "For",
+        "For the",
+        "For the launch",
+        "For the launch email",
+        "For the launch email,",
+        "For the launch email, write",
+        "For the launch email, write the",
+        "For the launch email, write the subject",
+        "For the launch email, write the subject line",
+        "For the launch email, write the subject line,",
+        "For the launch email, write the subject line, draft",
+        "For the launch email, write the subject line, draft the",
+        "For the launch email, write the subject line, draft the body",
+        "For the launch email, write the subject line, draft the body,",
+        "For the launch email, write the subject line, draft the body, and",
+        "For the launch email, write the subject line, draft the body, and send",
+        "For the launch email, write the subject line, draft the body, and send it."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "write subject line",
+            "draft body",
+            "send email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "finish launch email"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "write subject line",
+            "draft body",
+            "send email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "subtasks"
+        }
+      ]
+    },
+    {
+      "id": "separate_not_substeps",
+      "category": "subtasks",
+      "transcriptVariants": [
+        "Write launch email, call Sam, and pay rent.",
+        "Uh, launch email, call Sam, pay rent.",
+        "I need to write the launch email. Also call Sam. Also pay rent.",
+        "Three things: write launch email, call Sam, pay rent.",
+        "Write the launch email, call Sam, pay rent, that's all."
+      ],
+      "expectedSelectedMeanings": [
+        "write launch email",
+        "call Sam",
+        "pay rent"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "send launch email",
+        "schedule with Sam"
+      ],
+      "notes": "Three peer tasks; don't merge or invent send/schedule.",
+      "liveSnapshots": [
+        "Write launch email",
+        "Write launch email, call Sam",
+        "Write launch email, call Sam, and pay rent."
+      ],
+      "livePartials": [
+        "Write",
+        "Write launch",
+        "Write launch email",
+        "Write",
+        "Write launch",
+        "Write launch email",
+        "Write launch email,",
+        "Write launch email, call",
+        "Write launch email, call Sam",
+        "Write",
+        "Write launch",
+        "Write launch email",
+        "Write launch email,",
+        "Write launch email, call",
+        "Write launch email, call Sam",
+        "Write launch email, call Sam,",
+        "Write launch email, call Sam, and",
+        "Write launch email, call Sam, and pay",
+        "Write launch email, call Sam, and pay rent."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "write launch email"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call Sam",
+            "pay rent",
+            "schedule with Sam",
+            "send launch email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "write launch email",
+            "call Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay rent",
+            "schedule with Sam",
+            "send launch email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "write launch email",
+            "call Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "schedule with Sam",
+            "send launch email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "future_tomorrow_exclude",
+      "category": "future",
+      "transcriptVariants": [
+        "Tomorrow I need to call Sam, but today I need to pay rent.",
+        "Uh tomorrow call Sam. Today pay rent.",
+        "Not today, but tomorrow I should call Sam. Today just pay rent.",
+        "Pay rent today. Call Sam tomorrow.",
+        "Today's thing is pay rent. Tomorrow is call Sam."
+      ],
+      "expectedSelectedMeanings": [
+        "pay rent"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "call Sam"
+      ],
+      "notes": "Future-day tasks excluded; today's task wins.",
+      "liveSnapshots": [
+        "Pay rent today.",
+        "Tomorrow I need to call Sam, but today I need to pay rent."
+      ],
+      "livePartials": [
+        "Pay",
+        "Pay rent",
+        "Pay rent today.",
+        "Tomorrow",
+        "Tomorrow I",
+        "Tomorrow I need",
+        "Tomorrow I need to",
+        "Tomorrow I need to call",
+        "Tomorrow I need to call Sam",
+        "Tomorrow I need to call Sam,",
+        "Tomorrow I need to call Sam, but",
+        "Tomorrow I need to call Sam, but today",
+        "Tomorrow I need to call Sam, but today I",
+        "Tomorrow I need to call Sam, but today I need",
+        "Tomorrow I need to call Sam, but today I need to",
+        "Tomorrow I need to call Sam, but today I need to pay",
+        "Tomorrow I need to call Sam, but today I need to pay rent."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "future"
+        }
+      ]
+    },
+    {
+      "id": "future_prepare_today",
+      "category": "future",
+      "transcriptVariants": [
+        "For tomorrow's meeting, prepare the notes today.",
+        "I need to prep notes today for tomorrow's meeting.",
+        "Prepare notes for the meeting tomorrow.",
+        "Uh, today, prep tomorrow's meeting notes.",
+        "Put prepare meeting notes for tomorrow."
+      ],
+      "expectedSelectedMeanings": [
+        "prepare meeting notes"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "attend meeting",
+        "schedule meeting"
+      ],
+      "notes": "Prep-today-for-tomorrow is a today task.",
+      "liveSnapshots": [
+        "For tomorrow's meeting, prepare the notes today."
+      ],
+      "livePartials": [
+        "For",
+        "For tomorrow's",
+        "For tomorrow's meeting",
+        "For tomorrow's meeting,",
+        "For tomorrow's meeting, prepare",
+        "For tomorrow's meeting, prepare the",
+        "For tomorrow's meeting, prepare the notes",
+        "For tomorrow's meeting, prepare the notes today."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "prepare meeting notes"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "attend meeting",
+            "schedule meeting"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "future"
+        }
+      ]
+    },
+    {
+      "id": "negative_no_twitter",
+      "category": "negative",
+      "transcriptVariants": [
+        "Don't scroll Twitter.",
+        "Uh, do not scroll Twitter today.",
+        "My thing is don't open Twitter.",
+        "Stay off Twitter.",
+        "Avoid Twitter until tonight."
+      ],
+      "expectedSelectedMeanings": [
+        "avoid Twitter"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "use social media less generally",
+        "delete Twitter",
+        "focus on work"
+      ],
+      "notes": "Negative commitments are valid tasks when explicitly stated. Accept any negative phrasing around Twitter (don't scroll, stay off, avoid, don't open).",
+      "liveSnapshots": [
+        "Don't scroll Twitter."
+      ],
+      "livePartials": [
+        "Don't",
+        "Don't scroll",
+        "Don't scroll Twitter."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "avoid Twitter"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "use social media less generally",
+            "delete Twitter",
+            "focus on work"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "negative"
+        }
+      ]
+    },
+    {
+      "id": "correction_forget_everything",
+      "category": "correction",
+      "transcriptVariants": [
+        "Email Sam, pay rent, actually forget both.",
+        "Uh email Sam and pay rent. Wait, never mind, forget both.",
+        "Put email Sam, pay rent. Scratch that, none of that.",
+        "Email Sam. Pay rent. Actually cancel everything.",
+        "I said email Sam and pay rent but forget both tasks."
+      ],
+      "expectedSelectedMeanings": [],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": true,
+      "forbiddenMeanings": [
+        "email Sam",
+        "pay rent",
+        "call Sam"
+      ],
+      "notes": "User cancels all stated tasks; end with no draft.",
+      "liveSnapshots": [
+        "Email Sam",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent, actually forget both."
+      ],
+      "livePartials": [
+        "Email",
+        "Email Sam",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent,",
+        "Email Sam, pay rent, actually",
+        "Email Sam, pay rent, actually forget",
+        "Email Sam, pay rent, actually forget both."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay rent"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "email Sam",
+            "pay rent",
+            "call Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": true,
+          "category": "correction"
+        }
+      ]
+    },
+    {
+      "id": "correction_park_to_store_direct",
+      "category": "correction",
+      "transcriptVariants": [
+        "Go to the park, actually go to the store.",
+        "Go to park, actually store.",
+        "I was going to the park, actually the store.",
+        "Park, no, store.",
+        "Let's do the park. Actually the store."
+      ],
+      "expectedSelectedMeanings": [
+        "go to the store"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "go to the park",
+        "buy groceries"
+      ],
+      "notes": "Replacement without explicit never mind; store wins.",
+      "liveSnapshots": [
+        "Go to the park",
+        "Go to the park, actually go to the store."
+      ],
+      "livePartials": [
+        "Go",
+        "Go to",
+        "Go to the",
+        "Go to the park",
+        "Go",
+        "Go to",
+        "Go to the",
+        "Go to the park",
+        "Go to the park,",
+        "Go to the park, actually",
+        "Go to the park, actually go",
+        "Go to the park, actually go to",
+        "Go to the park, actually go to the",
+        "Go to the park, actually go to the store."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "go to the park"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to the store"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "go to the store"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "go to the park",
+            "buy groceries"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "correction"
+        }
+      ]
+    },
+    {
+      "id": "overflow_then_drop_fourth",
+      "category": "correction",
+      "transcriptVariants": [
+        "Email Sam, pay rent, buy milk, and call mom, scratch call mom.",
+        "Email Sam, pay rent, buy milk, call mom, wait remove call mom.",
+        "Sam, rent, milk, mom, actually not mom.",
+        "Email Sam, pay rent, buy milk, call mom, never mind on mom.",
+        "Four things then drop call mom: email Sam, pay rent, buy milk, call mom, skip mom."
+      ],
+      "expectedSelectedMeanings": [
+        "email Sam",
+        "pay rent",
+        "buy milk"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "call mom",
+        "grocery shopping beyond milk"
+      ],
+      "notes": "Brief 4-task overflow then correction removes fourth; ends at exactly three.",
+      "liveSnapshots": [
+        "Email Sam",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent, buy milk",
+        "Email Sam, pay rent, buy milk, and call mom",
+        "Email Sam, pay rent, buy milk, scratch call mom."
+      ],
+      "livePartials": [
+        "Email",
+        "Email Sam",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent,",
+        "Email Sam, pay rent, buy",
+        "Email Sam, pay rent, buy milk",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent,",
+        "Email Sam, pay rent, buy",
+        "Email Sam, pay rent, buy milk",
+        "Email Sam, pay rent, buy milk,",
+        "Email Sam, pay rent, buy milk, and",
+        "Email Sam, pay rent, buy milk, and call",
+        "Email Sam, pay rent, buy milk, and call mom",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent,",
+        "Email Sam, pay rent, buy",
+        "Email Sam, pay rent, buy milk",
+        "Email Sam, pay rent, buy milk,",
+        "Email Sam, pay rent, buy milk, scratch",
+        "Email Sam, pay rent, buy milk, scratch call",
+        "Email Sam, pay rent, buy milk, scratch call mom."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay rent",
+            "buy milk",
+            "call mom",
+            "call mom",
+            "grocery shopping beyond milk"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy milk",
+            "call mom",
+            "call mom",
+            "grocery shopping beyond milk"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent",
+            "buy milk"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call mom",
+            "call mom",
+            "grocery shopping beyond milk"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent",
+            "buy milk"
+          ],
+          "extraMeanings": [
+            "call mom"
+          ],
+          "forbiddenMeanings": [
+            "call mom",
+            "grocery shopping beyond milk"
+          ],
+          "expectedOverflow": true,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent",
+            "buy milk"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call mom",
+            "grocery shopping beyond milk"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "correction"
+        }
+      ]
+    },
+    {
+      "id": "no_task_then_one_task",
+      "category": "no_task",
+      "transcriptVariants": [
+        "Testing, testing, one two three. Email Sam.",
+        "Hello testing. Okay, email Sam.",
+        "Mic check one two. Email Sam today.",
+        "Testing testing. Uh, email Sam.",
+        "Is this on? Email Sam."
+      ],
+      "expectedSelectedMeanings": [
+        "email Sam"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "prepare for meeting",
+        "call client",
+        "test the mic"
+      ],
+      "notes": "Mic-test filler first, then one real task; step 1 must stay empty.",
+      "liveSnapshots": [
+        "Testing, testing",
+        "Testing, testing, one two three. Email Sam."
+      ],
+      "livePartials": [
+        "Testing",
+        "Testing,",
+        "Testing, testing",
+        "Testing",
+        "Testing,",
+        "Testing, testing",
+        "Testing, testing,",
+        "Testing, testing, one",
+        "Testing, testing, one two",
+        "Testing, testing, one two three.",
+        "Testing, testing, one two three. Email",
+        "Testing, testing, one two three. Email Sam."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "prepare for meeting",
+            "call client",
+            "test the mic",
+            "email Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": true
+        },
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "prepare for meeting",
+            "call client",
+            "test the mic"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "duplicate_pay_rent_thrice",
+      "category": "duplicate",
+      "transcriptVariants": [
+        "Pay rent, pay the rent, and pay rent again.",
+        "Uh pay rent, pay rent, pay rent.",
+        "Rent, pay rent, pay the rent.",
+        "I need to pay rent, pay rent again, pay the rent.",
+        "Pay the rent three times in a row, pay rent."
+      ],
+      "expectedSelectedMeanings": [
+        "pay rent"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "pay bills generally",
+        "budget finances"
+      ],
+      "notes": "Same commitment rephrased; collapse to one pay-rent task.",
+      "liveSnapshots": [
+        "Pay rent",
+        "Pay rent, pay the rent, and pay rent again."
+      ],
+      "livePartials": [
+        "Pay",
+        "Pay rent",
+        "Pay",
+        "Pay rent",
+        "Pay rent,",
+        "Pay rent, pay",
+        "Pay rent, pay the",
+        "Pay rent, pay the rent",
+        "Pay rent, pay the rent,",
+        "Pay rent, pay the rent, and",
+        "Pay rent, pay the rent, and pay",
+        "Pay rent, pay the rent, and pay rent",
+        "Pay rent, pay the rent, and pay rent again."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay bills generally",
+            "budget finances"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "pay bills generally",
+            "budget finances"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "literal_exactly_three_no_overflow",
+      "category": "literal",
+      "transcriptVariants": [
+        "Email Sam, pay rent, buy milk.",
+        "Email Sam. Pay rent. Buy milk.",
+        "Three things: email Sam, pay rent, buy milk.",
+        "Uh email Sam, pay rent, buy milk.",
+        "Today: email Sam, pay rent, buy milk."
+      ],
+      "expectedSelectedMeanings": [
+        "email Sam",
+        "pay rent",
+        "buy milk"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "call mom",
+        "grocery shopping generally"
+      ],
+      "notes": "Exactly three tasks must not set overflow flag.",
+      "liveSnapshots": [
+        "Email Sam",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent, buy milk"
+      ],
+      "livePartials": [
+        "Email",
+        "Email Sam",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email",
+        "Email Sam",
+        "Email Sam,",
+        "Email Sam, pay",
+        "Email Sam, pay rent",
+        "Email Sam, pay rent,",
+        "Email Sam, pay rent, buy",
+        "Email Sam, pay rent, buy milk"
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy milk",
+            "call mom",
+            "grocery shopping generally",
+            "pay rent"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "buy milk",
+            "call mom",
+            "grocery shopping generally"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "email Sam",
+            "pay rent",
+            "buy milk"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call mom",
+            "grocery shopping generally"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        }
+      ]
+    },
+    {
+      "id": "negative_plus_positive",
+      "category": "negative",
+      "transcriptVariants": [
+        "Don't scroll Twitter, and email Sam.",
+        "Stay off Twitter and email Sam.",
+        "Avoid Twitter, also email Sam.",
+        "No Twitter today, email Sam.",
+        "Don't open Twitter. Email Sam."
+      ],
+      "expectedSelectedMeanings": [
+        "avoid Twitter",
+        "email Sam"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "scroll Twitter",
+        "use social media",
+        "call Sam"
+      ],
+      "notes": "Negative commitment plus a normal task in one utterance.",
+      "liveSnapshots": [
+        "Don't scroll Twitter",
+        "Don't scroll Twitter, and email Sam."
+      ],
+      "livePartials": [
+        "Don't",
+        "Don't scroll",
+        "Don't scroll Twitter",
+        "Don't",
+        "Don't scroll",
+        "Don't scroll Twitter",
+        "Don't scroll Twitter,",
+        "Don't scroll Twitter, and",
+        "Don't scroll Twitter, and email",
+        "Don't scroll Twitter, and email Sam."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "scroll Twitter",
+            "use social media",
+            "call Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false
+        },
+        {
+          "selectedMeanings": [
+            "avoid Twitter",
+            "email Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "scroll Twitter",
+            "use social media",
+            "call Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "negative"
+        }
+      ]
+    },
+    {
+      "id": "inference_doctor_ramble",
+      "category": "inference_trap",
+      "transcriptVariants": [
+        "I've been putting off health stuff, but today I need to call the doctor.",
+        "So much going on, anyway call the doctor today.",
+        "Uh health things, the real task is call the doctor.",
+        "Been avoiding it, but call my doctor today.",
+        "Random stress, still, call the doctor."
+      ],
+      "expectedSelectedMeanings": [
+        "call the doctor"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "schedule appointment",
+        "go to doctor",
+        "manage health"
+      ],
+      "notes": "Rambling context must not invent schedule/visit; only stated call.",
+      "liveSnapshots": [
+        "I've been putting off health stuff, but today I need to call the doctor."
+      ],
+      "livePartials": [
+        "I've",
+        "I've been",
+        "I've been putting",
+        "I've been putting off",
+        "I've been putting off health",
+        "I've been putting off health stuff",
+        "I've been putting off health stuff,",
+        "I've been putting off health stuff, but",
+        "I've been putting off health stuff, but today",
+        "I've been putting off health stuff, but today I",
+        "I've been putting off health stuff, but today I need",
+        "I've been putting off health stuff, but today I need to",
+        "I've been putting off health stuff, but today I need to call",
+        "I've been putting off health stuff, but today I need to call the",
+        "I've been putting off health stuff, but today I need to call the doctor."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "call the doctor"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "schedule appointment",
+            "go to doctor",
+            "manage health"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "inference_trap"
+        }
+      ]
+    },
+    {
+      "id": "substeps_incremental_launch",
+      "category": "subtasks",
+      "transcriptVariants": [
+        "Launch email: subject line, body, send it.",
+        "For the launch email, subject, then body, then send.",
+        "Work on launch email \u2014 subject line, body, send.",
+        "Launch email steps: subject, body, send.",
+        "Finish launch email: subject, body, send."
+      ],
+      "expectedSelectedMeanings": [
+        "finish launch email"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "write subject line",
+        "draft body",
+        "send email"
+      ],
+      "notes": "Substeps arrive across live rounds; collapse to parent only.",
+      "liveSnapshots": [
+        "Launch email: subject line",
+        "Launch email: subject line, body",
+        "Launch email: subject line, body, send it."
+      ],
+      "livePartials": [
+        "Launch",
+        "Launch email:",
+        "Launch email: subject",
+        "Launch email: subject line",
+        "Launch",
+        "Launch email:",
+        "Launch email: subject",
+        "Launch email: subject line",
+        "Launch email: subject line,",
+        "Launch email: subject line, body",
+        "Launch",
+        "Launch email:",
+        "Launch email: subject",
+        "Launch email: subject line",
+        "Launch email: subject line,",
+        "Launch email: subject line, body",
+        "Launch email: subject line, body,",
+        "Launch email: subject line, body, send",
+        "Launch email: subject line, body, send it."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "finish launch email"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "write subject line",
+            "draft body",
+            "send email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "subtasks"
+        },
+        {
+          "selectedMeanings": [
+            "finish launch email"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "write subject line",
+            "draft body",
+            "send email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "subtasks"
+        },
+        {
+          "selectedMeanings": [
+            "finish launch email"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "write subject line",
+            "draft body",
+            "send email"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "subtasks"
+        }
+      ]
+    },
+    {
+      "id": "vague_taxes_not_specific",
+      "category": "vague",
+      "transcriptVariants": [
+        "Figure out taxes, not file the return.",
+        "Deal with taxes, but don't file the return.",
+        "Taxes stuff, not filing yet.",
+        "Handle taxes, I don't mean file the return.",
+        "Work on taxes, not actually file."
+      ],
+      "expectedSelectedMeanings": [
+        "taxes"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "file tax return",
+        "call accountant",
+        "gather receipts"
+      ],
+      "notes": "User rejects over-specific rewrite; stay vague on taxes.",
+      "liveSnapshots": [
+        "Figure out taxes",
+        "Figure out taxes, not file the return."
+      ],
+      "livePartials": [
+        "Figure",
+        "Figure out",
+        "Figure out taxes",
+        "Figure",
+        "Figure out",
+        "Figure out taxes",
+        "Figure out taxes,",
+        "Figure out taxes, not",
+        "Figure out taxes, not file",
+        "Figure out taxes, not file the",
+        "Figure out taxes, not file the return."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [
+            "taxes"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "file tax return",
+            "call accountant"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "vague"
+        },
+        {
+          "selectedMeanings": [
+            "taxes"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "file tax return",
+            "call accountant",
+            "gather receipts"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "vague"
+        }
+      ]
+    },
+    {
+      "id": "future_intraday_correction",
+      "category": "future",
+      "transcriptVariants": [
+        "Call Sam tomorrow, wait, call Sam today.",
+        "Tomorrow call Sam, actually call Sam today.",
+        "I said tomorrow but call Sam today.",
+        "Call Sam tomorrow. No, today.",
+        "Not tomorrow \u2014 call Sam today."
+      ],
+      "expectedSelectedMeanings": [
+        "call Sam"
+      ],
+      "expectedExtraMeanings": [],
+      "expectedOverflow": false,
+      "expectsNoDraft": false,
+      "forbiddenMeanings": [
+        "call Sam tomorrow"
+      ],
+      "notes": "Future phrasing corrected to today; only today's call remains.",
+      "liveSnapshots": [
+        "Call Sam tomorrow",
+        "Call Sam tomorrow, wait, call Sam today."
+      ],
+      "livePartials": [
+        "Call",
+        "Call Sam",
+        "Call Sam tomorrow",
+        "Call",
+        "Call Sam",
+        "Call Sam tomorrow",
+        "Call Sam tomorrow,",
+        "Call Sam tomorrow, wait",
+        "Call Sam tomorrow, wait,",
+        "Call Sam tomorrow, wait, call",
+        "Call Sam tomorrow, wait, call Sam",
+        "Call Sam tomorrow, wait, call Sam today."
+      ],
+      "liveStepExpectations": [
+        {
+          "selectedMeanings": [],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call Sam tomorrow",
+            "call Sam"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": true
+        },
+        {
+          "selectedMeanings": [
+            "call Sam"
+          ],
+          "extraMeanings": [],
+          "forbiddenMeanings": [
+            "call Sam tomorrow"
+          ],
+          "expectedOverflow": false,
+          "expectsNoDraft": false,
+          "category": "future"
+        }
+      ]
     }
   ]
 }

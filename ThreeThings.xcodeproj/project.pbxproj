@@ -28,7 +28,10 @@
 		A00000000000000000000062 /* AppleOnDeviceSpeechTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000058 /* AppleOnDeviceSpeechTranscriber.swift */; };
 		A00000000000000000000063 /* RecordingPermissionGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000059 /* RecordingPermissionGate.swift */; };
 		A00000000000000000000064 /* VoiceDraftExtracting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000005A /* VoiceDraftExtracting.swift */; };
-		A00000000000000000000065 /* FoundationModelsVoiceDraftExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000005B /* FoundationModelsVoiceDraftExtractor.swift */; };
+		A00000000000000000000120 /* VoiceDraftSessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000123 /* VoiceDraftSessionState.swift */; };
+		A00000000000000000000121 /* VoiceDraftToolEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000124 /* VoiceDraftToolEnvironment.swift */; };
+		A00000000000000000000122 /* ToolVoiceDraftExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000125 /* ToolVoiceDraftExtractor.swift */; };
+		A00000000000000000000126 /* VoiceDraftToolEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000127 /* VoiceDraftToolEnvironmentTests.swift */; };
 		A00000000000000000000066 /* SpeechCaptureManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000005C /* SpeechCaptureManagerTests.swift */; };
 		A00000000000000000000067 /* VoiceDraftPostProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000005D /* VoiceDraftPostProcessorTests.swift */; };
 		A00000000000000000000080 /* VoiceExtractionEvalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000006E /* VoiceExtractionEvalModels.swift */; };
@@ -46,6 +49,10 @@
 		A00000000000000000000106 /* VoiceWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000107 /* VoiceWaveformView.swift */; };
 		A0000000000000000000010C /* ReplaceThingPickerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000010B /* ReplaceThingPickerOverlay.swift */; };
 		A00000000000000000000104 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000105 /* Assets.xcassets */; };
+		A00000000000000000000134 /* TranscriptSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000130 /* TranscriptSnapshot.swift */; };
+		A00000000000000000000135 /* VoiceDraftSessionLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000131 /* VoiceDraftSessionLogic.swift */; };
+		A00000000000000000000136 /* LiveExtractionScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000132 /* LiveExtractionScheduler.swift */; };
+		A00000000000000000000137 /* LiveExtractionSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000133 /* LiveExtractionSchedulerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +90,10 @@
 		A00000000000000000000058 /* AppleOnDeviceSpeechTranscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOnDeviceSpeechTranscriber.swift; sourceTree = "<group>"; };
 		A00000000000000000000059 /* RecordingPermissionGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingPermissionGate.swift; sourceTree = "<group>"; };
 		A0000000000000000000005A /* VoiceDraftExtracting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDraftExtracting.swift; sourceTree = "<group>"; };
-		A0000000000000000000005B /* FoundationModelsVoiceDraftExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationModelsVoiceDraftExtractor.swift; sourceTree = "<group>"; };
+		A00000000000000000000123 /* VoiceDraftSessionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDraftSessionState.swift; sourceTree = "<group>"; };
+		A00000000000000000000124 /* VoiceDraftToolEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDraftToolEnvironment.swift; sourceTree = "<group>"; };
+		A00000000000000000000125 /* ToolVoiceDraftExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolVoiceDraftExtractor.swift; sourceTree = "<group>"; };
+		A00000000000000000000127 /* VoiceDraftToolEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDraftToolEnvironmentTests.swift; sourceTree = "<group>"; };
 		A0000000000000000000005C /* SpeechCaptureManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCaptureManagerTests.swift; sourceTree = "<group>"; };
 		A0000000000000000000005D /* VoiceDraftPostProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDraftPostProcessorTests.swift; sourceTree = "<group>"; };
 		A0000000000000000000006E /* VoiceExtractionEvalModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceExtractionEvalModels.swift; sourceTree = "<group>"; };
@@ -100,6 +110,10 @@
 		A00000000000000000000105 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A00000000000000000000107 /* VoiceWaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceWaveformView.swift; sourceTree = "<group>"; };
 		A0000000000000000000010B /* ReplaceThingPickerOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceThingPickerOverlay.swift; sourceTree = "<group>"; };
+		A00000000000000000000130 /* TranscriptSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptSnapshot.swift; sourceTree = "<group>"; };
+		A00000000000000000000131 /* VoiceDraftSessionLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDraftSessionLogic.swift; sourceTree = "<group>"; };
+		A00000000000000000000132 /* LiveExtractionScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveExtractionScheduler.swift; sourceTree = "<group>"; };
+		A00000000000000000000133 /* LiveExtractionSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveExtractionSchedulerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +176,7 @@
 				A0000000000000000000001A /* DailyPlan.swift */,
 				A0000000000000000000001B /* InputMode.swift */,
 				A00000000000000000000053 /* VoiceExtractionDraft.swift */,
+				A00000000000000000000123 /* VoiceDraftSessionState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,11 +194,23 @@
 			isa = PBXGroup;
 			children = (
 				A0000000000000000000007D /* Eval */,
+				A00000000000000000000138 /* LiveExtraction */,
 				A0000000000000000000005A /* VoiceDraftExtracting.swift */,
-				A0000000000000000000005B /* FoundationModelsVoiceDraftExtractor.swift */,
+				A00000000000000000000124 /* VoiceDraftToolEnvironment.swift */,
+				A00000000000000000000125 /* ToolVoiceDraftExtractor.swift */,
 				A00000000000000000000054 /* MockVoiceDraftProvider.swift */,
 			);
 			path = Extraction;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000138 /* LiveExtraction */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000130 /* TranscriptSnapshot.swift */,
+				A00000000000000000000131 /* VoiceDraftSessionLogic.swift */,
+				A00000000000000000000132 /* LiveExtractionScheduler.swift */,
+			);
+			path = LiveExtraction;
 			sourceTree = "<group>";
 		};
 		A0000000000000000000007D /* Eval */ = {
@@ -283,6 +310,8 @@
 				A00000000000000000000072 /* VoiceExtractionEvalFixtureTests.swift */,
 				A00000000000000000000073 /* VoiceExtractionEvalScorerTests.swift */,
 				A00000000000000000000103 /* LiveVoiceExtractionTests.swift */,
+				A00000000000000000000133 /* LiveExtractionSchedulerTests.swift */,
+				A00000000000000000000127 /* VoiceDraftToolEnvironmentTests.swift */,
 			);
 			path = ThreeThingsTests;
 			sourceTree = "<group>";
@@ -392,6 +421,7 @@
 				A00000000000000000000032 /* DailyPlan.swift in Sources */,
 				A00000000000000000000033 /* InputMode.swift in Sources */,
 				A00000000000000000000050 /* VoiceExtractionDraft.swift in Sources */,
+				A00000000000000000000120 /* VoiceDraftSessionState.swift in Sources */,
 				A00000000000000000000051 /* MockVoiceDraftProvider.swift in Sources */,
 				A0000000000000000000003A /* SpeechCaptureManager.swift in Sources */,
 				A00000000000000000000098 /* LiveSpeechCapture.swift in Sources */,
@@ -400,7 +430,11 @@
 				A00000000000000000000062 /* AppleOnDeviceSpeechTranscriber.swift in Sources */,
 				A00000000000000000000063 /* RecordingPermissionGate.swift in Sources */,
 				A00000000000000000000064 /* VoiceDraftExtracting.swift in Sources */,
-				A00000000000000000000065 /* FoundationModelsVoiceDraftExtractor.swift in Sources */,
+				A00000000000000000000121 /* VoiceDraftToolEnvironment.swift in Sources */,
+				A00000000000000000000122 /* ToolVoiceDraftExtractor.swift in Sources */,
+				A00000000000000000000134 /* TranscriptSnapshot.swift in Sources */,
+				A00000000000000000000135 /* VoiceDraftSessionLogic.swift in Sources */,
+				A00000000000000000000136 /* LiveExtractionScheduler.swift in Sources */,
 				A0000000000000000000003B /* AppViewModel.swift in Sources */,
 				A0000000000000000000003C /* RootView.swift in Sources */,
 				A0000000000000000000003D /* TextCaptureView.swift in Sources */,
@@ -430,6 +464,8 @@
 				A00000000000000000000084 /* VoiceExtractionEvalFixtureTests.swift in Sources */,
 				A00000000000000000000085 /* VoiceExtractionEvalScorerTests.swift in Sources */,
 				A00000000000000000000102 /* LiveVoiceExtractionTests.swift in Sources */,
+				A00000000000000000000137 /* LiveExtractionSchedulerTests.swift in Sources */,
+				A00000000000000000000126 /* VoiceDraftToolEnvironmentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

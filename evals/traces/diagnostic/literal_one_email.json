@@ -1,0 +1,7 @@
+{
+  "case_id": "literal_one_email",
+  "transcript": "Email Sam.",
+  "calls": [
+    {"tool": "add_task", "text": "email Sam"}
+  ]
+}

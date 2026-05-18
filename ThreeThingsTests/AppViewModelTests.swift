@@ -231,7 +231,8 @@ final class AppViewModelTests: XCTestCase {
         struct ThrowingExtractor: VoiceDraftExtracting {
             var providerName: String { "Throwing" }
 
-            func extractDraft(from transcript: String) async throws -> VoiceExtractionDraft {
+            func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
+                _ = context
                 throw VoiceDraftExtractionError.modelUnavailable
             }
         }
@@ -253,7 +254,8 @@ final class AppViewModelTests: XCTestCase {
         struct EmptyExtractor: VoiceDraftExtracting {
             var providerName: String { "Empty" }
 
-            func extractDraft(from transcript: String) async throws -> VoiceExtractionDraft {
+            func applyTranscript(_ context: VoiceDraftExtractionContext) async throws -> (VoiceDraftExtractionOutcome, VoiceDraftSessionState) {
+                _ = context
                 throw VoiceDraftExtractionError.emptyModelOutput
             }
         }
@@ -295,7 +297,7 @@ final class AppViewModelTests: XCTestCase {
     }
 
     private func makeViewModel(
-        voiceDraftExtractor: any VoiceDraftExtracting = HeuristicVoiceDraftExtractor(),
+        voiceDraftExtractor: any VoiceDraftExtracting = HeuristicToolVoiceDraftExtractor(),
         dateProvider: @escaping () -> Date = Date.init
     ) -> AppViewModel {
         AppViewModel(defaults: defaults, voiceDraftExtractor: voiceDraftExtractor, dateProvider: dateProvider)

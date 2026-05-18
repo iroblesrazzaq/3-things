@@ -14,15 +14,21 @@ final class VoiceDraftPostProcessorTests: XCTestCase {
     }
 
     func testLongCandidatesClampToOneHundred() throws {
-        let longSelected = String(repeating: "a", count: 140)
-        let longExtra = String(repeating: "b", count: 140)
+        let longA = String(repeating: "a", count: 140)
+        let longB = String(repeating: "b", count: 140)
+        let longC = String(repeating: "c", count: 140)
+        let longOverflow = String(repeating: "d", count: 140)
         let draft = try VoiceDraftPostProcessor.buildDraft(
-            selectedTasks: [longSelected],
-            extraCandidates: [longExtra],
+            selectedTasks: [longA, longB, longC, longOverflow],
+            extraCandidates: [],
             detectedMoreThanThree: true,
-            cleanedTranscript: longSelected
+            cleanedTranscript: "x"
         )
+        XCTAssertEqual(draft.selectedTasks.count, 3)
         XCTAssertEqual(draft.selectedTasks[0].count, 100)
+        XCTAssertEqual(draft.selectedTasks[1].count, 100)
+        XCTAssertEqual(draft.selectedTasks[2].count, 100)
+        XCTAssertEqual(draft.extraCandidates.count, 1)
         XCTAssertEqual(draft.extraCandidates[0].count, 100)
     }
 

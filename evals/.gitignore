@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+reports/*.json
+!reports/.gitkeep
+autoresearch/runs/
+autoresearch/results.tsv
